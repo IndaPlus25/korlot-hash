@@ -15,14 +15,22 @@ class House:
 
 
 def control_connection(house):
-    _visited.add(house)
-    for connected in houses[house].connecting:
-         if connected not in _visited:
-              control_connection(connected)
+    stack = [house]
+    while stack:
+        _checking = stack.pop()
+        if _checking not in _visited:
+            _visited.add(_checking)
+            for neighbour in houses[_checking].connecting:
+                if neighbour not in _visited:
+                        stack.append(neighbour)
 
-if int(data[0]) < 3:
+    #for connected in houses[house].connecting:
+    #     if connected not in _visited:
+    #          control_connection(connected)
+
+if int(data[0]) == 1:
     print("Connected")
-
+ 
 else:
     total_houses = int(data[0])
     number_of_cables = int(data[1])
@@ -39,10 +47,14 @@ else:
     #Controll connected to house 1
     control_connection(1)
 
-    countdown = int(data[0])
+    if int(data[0]) == len(_visited):
+        print("Connected")
+    
+    else:
+        countdown = int(data[0])
 
-    for i in range(1,countdown+1):
-        if i in _visited:
-             continue
-        else:
-            print(str(i))
+        for i in range(1,countdown+1):
+            if i in _visited:
+                continue
+            else:
+                print(str(i))
