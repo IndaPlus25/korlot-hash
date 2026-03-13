@@ -20,7 +20,7 @@ def control_connection(house):
          if connected not in _visited:
               control_connection(connected)
 
-if int(data[0]) < 2:
+if int(data[0]) < 3:
     print("Connected")
 
 else:
@@ -41,6 +41,8 @@ else:
 
     countdown = int(data[0])
 
-    for i in range(countdown, 0, -1):
-        if str(i) not in _visited:
-             print(str(i))
+    for i in range(1,countdown+1):
+        if i in _visited:
+             continue
+        else:
+            print(str(i))
